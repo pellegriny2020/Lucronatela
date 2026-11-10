@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucro na Tela - O App do Motoka e Motorista Inteligente</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,900;1,800;1,900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body {
+      background-color: #080b0e;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.4;
+      background-image: 
+        radial-gradient(circle at 50% 10%, rgba(0, 255, 136, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 10% 40%, rgba(255, 170, 0, 0.08) 0%, transparent 50%),
+        linear-gradient(180deg, #080b0e 0%, #030507 100%);
+    }
+    .container { max-width: 1040px; margin: 0 auto; padding: 30px 20px 80px 20px; text-align: center; }
+    .logo-container { margin-bottom: 24px; display: inline-block; position: relative; }
+    .logo-badge {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: radial-gradient(circle, #0e1e13 0%, #050a07 100%);
+      border: 3px solid #00ff88;
+      box-shadow: 0 0 35px rgba(0, 255, 136, 0.5), inset 0 0 15px rgba(0, 255, 136, 0.3);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      margin: 0 auto;
+    }
+    .logo-badge .lc {
+      font-family: 'Montserrat', sans-serif; font-weight: 900; font-style: italic; font-size: 38px;
+      background: linear-gradient(135deg, #00ff88 0%, #ffd000 60%, #ff8800 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 0.95;
+    }
+    .logo-badge .sub {
+      font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 9px; color: #ffd000;
+      letter-spacing: 1px; margin-top: 2px; text-shadow: 0 0 6px rgba(255, 208, 0, 0.6);
+    }
+    .main-title {
+      font-family: 'Montserrat', sans-serif; font-style: italic; font-weight: 900;
+      font-size: clamp(24px, 5.5vw, 44px); text-transform: uppercase; letter-spacing: -0.5px;
+      line-height: 1.15; margin-bottom: 14px; color: #ffffff;
+    }
+    .main-title span {
+      background: linear-gradient(90deg, #00ff88, #26e6a3);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .subtitle { font-size: clamp(14px, 2.5vw, 17px); color: #9eb1c2; max-width: 680px; margin: 0 auto 30px auto; }
+    .subtitle strong { color: #ffffff; }
+    .btn-cta {
+      display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+      background: linear-gradient(135deg, #00ff88 0%, #00cc66 100%);
+      color: #002b11; font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: clamp(16px, 3.5vw, 21px); text-transform: uppercase; padding: 18px 42px;
+      border-radius: 50px; text-decoration: none; box-shadow: 0 0 30px rgba(0, 255, 136, 0.45);
+      transition: all 0.25s ease; border: none; cursor: pointer;
+    }
+    .btn-cta:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 0 45px rgba(0, 255, 136, 0.7); }
+    .cta-note { margin-top: 10px; font-size: 13px; color: #6d8294; font-weight: 500; }
+    .phones-showcase {
+      display: flex; justify-content: center; align-items: center; gap: 18px; margin: 50px 0 60px 0; flex-wrap: wrap;
+    }
+    .phone-mockup {
+      width: 270px; background: #0f141a; border-radius: 36px; border: 4px solid #1c2630;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 255, 136, 0.15);
+      padding: 12px;
+    }
+    .phone-mockup.featured {
+      transform: scale(1.04); border-color: #00ff88; box-shadow: 0 25px 55px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 255, 136, 0.35); z-index: 2;
+    }
+    .phone-screen {
+      background: #f4f6f8; border-radius: 26px; color: #1a1a1a; padding: 14px 10px; text-align: left; font-size: 11px; min-height: 480px; display: flex; flex-direction: column;
+    }
+    .screen-header { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 13px; margin-bottom: 10px; color: #0b1f14; }
+    .app-badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 8px; }
+    .app-chip { padding: 5px 2px; border-radius: 6px; color: #fff; font-weight: 800; text-align: center; font-size: 9px; }
+    .chip-ifood { background: #ea1d2c; }
+    .chip-99f { background: #f6ab00; }
+    .chip-keeta { background: #ffcc00; color: #000; }
+    .chip-uber { background: #000; }
+    .chip-99p { background: #e09b00; }
+    .chip-indrive { background: #2bd853; color: #000; }
+    .stat-card { background: #ffffff; border: 1px solid #d2e4d9; border-radius: 10px; padding: 8px; margin-bottom: 8px; }
+    .stat-val-green { color: #00a859; font-weight: 900; font-size: 14px; }
+    .stat-val-red { color: #d32f2f; font-weight: 900; font-size: 14px; }
+    .phone-btn { background: #00c853; color: white; text-align: center; padding: 9px; border-radius: 20px; font-weight: 800; font-size: 11px; margin-top: auto; text-transform: uppercase; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 60px; }
+    .feat-card { background: rgba(18, 25, 33, 0.7); border: 1px solid #1e2c38; border-radius: 16px; padding: 22px 18px; text-align: center; backdrop-filter: blur(10px); }
+    .feat-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; color: #00ff88; margin-bottom: 8px; text-transform: uppercase; }
+    .feat-card p { color: #8c9fae; font-size: 12px; line-height: 1.5; }
+    .footer { border-top: 1px solid #17222c; padding-top: 30px; color: #556877; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <div class="logo-badge">
+        <div class="lc">LC</div>
+        <div class="sub">LUCRO NA TELA</div>
+      </div>
+    </div>
+    <h1 class="main-title">Lucro na Tela – O App do <span>Motoka</span> e do <span>Motorista</span></h1>
+    <p class="subtitle">Chega de rodar no prejuízo! Calcule o valor por KM, monitore <strong>iFood, Keeta, Uber, 99 e inDrive</strong> em tempo real e saiba exatamente quanto vai sobrar no bolso antes de aceitar cada corrida.</p>
+    <div>
+      <a href="lucronatela.apk" download class="btn-cta">
+        <span>BAIXAR APK AGORA (GRÁTIS)</span>
+      </a>
+      <p class="cta-note">100% Seguro • Download Direto para Android</p>
+    </div>
+    <div class="phones-showcase">
+      <div class="phone-mockup">
+        <div class="phone-screen">
+          <div class="screen-header"><span>Bom dia, Tiago</span><span>🌙</span></div>
+          <div class="app-badges">
+            <div class="app-chip chip-ifood">iFood ✓</div>
+            <div class="app-chip chip-99f">99 Food ✓</div>
+            <div class="app-chip chip-keeta">Keeta ✓</div>
+            <div class="app-chip chip-uber">Uber ✓</div>
+            <div class="app-chip chip-99p">99 Pass. ✓</div>
+            <div class="app-chip chip-indrive">inDrive ✓</div>
+          </div>
+          <div class="stat-card">
+            <div>Mínimo: <strong>R$ 7,50</strong></div>
+            <div>Mínimo/Km: <strong>R$ 2,00/km</strong></div>
+          </div>
+          <div class="stat-card">
+            <div>Gasolina: <strong>- R$ 25,00</strong></div>
+            <div>Refeição: <strong>- R$ 25,00</strong></div>
+          </div>
+          <div class="phone-btn">▶ INICIAR EXPEDIENTE</div>
+        </div>
+      </div>
+      <div class="phone-mockup featured">
+        <div class="phone-screen">
+          <div class="screen-header"><span>💰 Financeiro Real</span></div>
+          <div class="stat-card">
+            <div>Ganhos Brutos: <span class="stat-val-green">R$ 180,00</span></div>
+            <div>Combustível: <span class="stat-val-red">- R$ 35,00</span></div>
+            <div>Alimentação: <span class="stat-val-red">- R$ 25,00</span></div>
+            <hr style="margin: 6px 0; border: none; border-top: 1px dashed #ccc;">
+            <div>Lucro Líquido: <strong class="stat-val-green" style="font-size:16px;">R$ 120,00</strong></div>
+          </div>
+          <div class="stat-card">
+            <div>Km Rodados: <strong>48,5 km</strong></div>
+            <div>Média Real/Km: <strong class="stat-val-green">R$ 3,71/km</strong></div>
+          </div>
+          <div class="phone-btn" style="background:#e02424;">ZERAR DIÁRIO</div>
+        </div>
+      </div>
+      <div class="phone-mockup">
+        <div class="phone-screen">
+          <div class="screen-header"><span>📊 Desempenho</span></div>
+          <div class="stat-card">
+            <div>Taxa de Vantajosas: <span class="stat-val-green">78%</span></div>
+            <div>Ofertas Analisadas: <strong>32</strong></div>
+            <div>Recusadas (Ruins): <span class="stat-val-red">7</span></div>
+          </div>
+          <div class="stat-card">
+            <div>Média por KM: <strong>R$ 3,40 /km</strong></div>
+            <div>Tempo Economizado: <strong>1h 40min</strong></div>
+          </div>
+          <div class="phone-btn" style="background:#1976d2;">HISTÓRICO COMPLETO</div>
+        </div>
+      </div>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card">
+        <h3>Controle na Hora</h3>
+        <p>Desconte gasolina e alimentação automaticamente para saber o lucro líquido de verdade.</p>
+      </div>
+      <div class="feat-card">
+        <h3>Meta por KM</h3>
+        <p>Defina o seu mínimo por km e por corrida para aceitar só o que coloca dinheiro no seu bolso.</p>
+      </div>
+      <div class="feat-card">
+        <h3>Histórico e Métricas</h3>
+        <p>Veja quantas corridas valeram a pena e compare a produtividade entre os aplicativos.</p>
+      </div>
+      <div class="feat-card">
+        <h3>Backup e PDF</h3>
+        <p>Guarde seus dados com segurança e exporte relatórios consolidados em PDF quando quiser.</p>
+      </div>
+    </div>
+    <div class="footer">
+      <p>© 2026 Lucro na Tela • Desenvolvido para os parceiros das pistas</p>
+    </div>
+  </div>
+</body>
+</html>
